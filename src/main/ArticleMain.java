@@ -21,15 +21,12 @@ public class ArticleMain {
 
         Scanner sc = new Scanner(System.in);
 
-        // 1. 게시글 관련 객체 생성
         ArticleRepository articleRepository = new ArticleRepository(connection);
         ArticleService articleService = new ArticleService(articleRepository);
 
-        // 🌟 2. 댓글 관련 객체 생성 (추가된 부분)
         CommentRepository commentRepository = new CommentRepository(connection);
         CommentService commentService = new CommentService(commentRepository);
 
-        // 🌟 3. ArticleView 생성 시 commentService도 같이 전달 (생성자 수정 필요)
         ArticleView articleView = new ArticleView(sc, articleService, commentService);
 
         int input = -1;

@@ -12,7 +12,7 @@ public class CommentService {
         this.repository = repository;
     }
 
-    // 🌟 [추가됨] 댓글 리스트를 가져오는 비즈니스 로직
+    //  댓글 리스트를 가져오는 비즈니스 로직
     public List<CommentDto> getComments(Long articleId) {
         return repository.getCommentsByArticleId(articleId);
     }

@@ -11,12 +11,11 @@ import java.util.Scanner;
 
 public class ArticleView {
 
-    // 1. 기존에 쓰시던 변수명(scanner, service)으로 통일했습니다!
     private Scanner scanner;
     private ArticleService service;
     private CommentService commentService;
 
-    // 2. 생성자
+    // 생성자
     public ArticleView(Scanner scanner, ArticleService service, CommentService commentService) {
         this.scanner = scanner;
         this.service = service;
@@ -30,7 +29,6 @@ public class ArticleView {
         scanner.nextLine(); // 엔터키 비우기
 
         try {
-            // [수정됨] 하드코딩이 아닌, 실제 DB에서 게시글을 가져옵니다! (update 메서드 로직 참고)
             List<ArticleDto> exists = service.getArticleOne(targetArticleId);
             if (exists.isEmpty()) {
                 System.out.println("해당 ID의 게시글이 없습니다.");
@@ -119,7 +117,7 @@ public class ArticleView {
         }
     }
 
-    // ================== 아래는 기존에 작성하신 완벽한 메서드들입니다 ==================
+
 
     public void delete() throws Exception {
         System.out.println("삭제할 글 : ");

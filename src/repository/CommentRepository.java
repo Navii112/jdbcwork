@@ -49,7 +49,6 @@ public class CommentRepository {
     // 1. 특정 게시글의 댓글만 가져오는 메서드
     public List<CommentDto> getCommentsByArticleId(Long articleId) {
         List<CommentDto> commentList = new ArrayList<>();
-        // 🌟 수정: WHERE articleId -> WHERE article_id
         String sql = "SELECT * FROM comments WHERE article_id = ?";
 
         try (PreparedStatement psmt = conn.prepareStatement(sql)) {
@@ -58,7 +57,6 @@ public class CommentRepository {
             try (ResultSet rs = psmt.executeQuery()) {
                 while (rs.next()) {
                     CommentDto dto = new CommentDto();
-                    // 🌟 수정: DB 컬럼명에 맞게 매핑
                     dto.setId(rs.getLong("comment_id"));
                     dto.setArticleId(rs.getLong("article_id"));
                     dto.setAuthor(rs.getString("name"));
@@ -76,7 +74,6 @@ public class CommentRepository {
     // 2. 댓글 등록
     public int insertComment(CommentDto comment) {
         int result = 0;
-        // 🌟 수정: articleId, author -> article_id, name
         String sql = "INSERT INTO comments (article_id, name, content) VALUES (?, ?, ?)";
 
         try (PreparedStatement psmt = conn.prepareStatement(sql)) {
@@ -93,7 +90,6 @@ public class CommentRepository {
 
     // 3. 댓글 수정
     public void updateComment(CommentDto comment) {
-        // 🌟 수정: WHERE id -> WHERE comment_id
         String sql = "UPDATE comments SET content = ? WHERE comment_id = ?";
 
         try (PreparedStatement psmt = conn.prepareStatement(sql)) {
@@ -108,7 +104,6 @@ public class CommentRepository {
 
     // 4. 댓글 삭제
     public void deleteComment(Long deleteCommentId) {
-        // 🌟 수정: WHERE id -> WHERE comment_id
         String sql = "DELETE FROM comments WHERE comment_id = ?";
 
         try (PreparedStatement psmt = conn.prepareStatement(sql)) {
